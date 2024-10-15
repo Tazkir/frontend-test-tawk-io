@@ -53,6 +53,12 @@
         </div>
       </div>
     </div>
+
+    <div class="divider"></div>
+
+    <div class="category-carousel-wrapper" v-if="categoryId">
+      <CategoryCarousel :currentCategoryId="categoryId" :key="categoryId" />
+    </div>
   </div>
 </template>
 
@@ -68,6 +74,7 @@ import InfoIcon from "./Icons/InfoIcon.vue";
 import FileIcon from "./Icons/FileIcon.vue";
 import NextIcon from "./Icons/NextIcon.vue";
 import { formatDate, formatDateTime } from "../utils/formatDate";
+import CategoryCarousel from "./CategoryCarousel.vue";
 
 export default {
   components: {
@@ -80,6 +87,7 @@ export default {
     InfoIcon,
     FileIcon,
     NextIcon,
+    CategoryCarousel,
   },
   props: {
     categoryId: {
@@ -125,7 +133,7 @@ export default {
         this.category = categories.find((cat) => cat.id === this.categoryId);
       } catch (error) {
         console.error(
-          "Error fetching category:",
+          "Error fetching categories:",
           error.response || error.message || error
         );
       }
@@ -144,9 +152,14 @@ export default {
     formatDateTime,
     formatDate,
   },
-  mounted() {
-    this.fetchArticles();
-    this.fetchCategories();
+  watch: {
+    categoryId: {
+      immediate: true,
+      handler() {
+        this.fetchArticles();
+        this.fetchCategories();
+      },
+    },
   },
 };
 </script>
@@ -170,6 +183,7 @@ export default {
   align-items: start;
   justify-content: center;
   gap: 5rem;
+  padding-bottom: 5rem;
 }
 
 .category-card-top {
@@ -296,5 +310,17 @@ export default {
   > span:last-child {
     color: gray;
   }
+}
+
+.category-carousel-wrapper {
+  width: 100%;
+  height: 100%;
+  padding: 3rem 0 2rem 0;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 </style>
