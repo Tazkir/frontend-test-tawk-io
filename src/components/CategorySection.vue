@@ -48,21 +48,7 @@
             </div>
           </div>
           <div>
-            <svg
-              width="11"
-              height="20"
-              viewBox="0 0 11 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M1.21802 18.3195L9.65417 9.92577L1.21802 1.53207"
-                stroke="#03A84E"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
+            <NextIcon />
           </div>
         </div>
       </div>
@@ -80,6 +66,7 @@ import MessageIcon from "./Icons/MessageIcon.vue";
 import MonitorIcon from "./Icons/MonitorIcon.vue";
 import InfoIcon from "./Icons/InfoIcon.vue";
 import FileIcon from "./Icons/FileIcon.vue";
+import NextIcon from "./Icons/NextIcon.vue";
 import { formatDate, formatDateTime } from "../utils/formatDate";
 
 export default {
@@ -92,6 +79,7 @@ export default {
     MonitorIcon,
     InfoIcon,
     FileIcon,
+    NextIcon,
   },
   props: {
     categoryId: {

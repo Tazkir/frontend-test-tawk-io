@@ -7,7 +7,7 @@ const webpack = require("webpack");
 
 module.exports = {
   entry: ["./src/app.js"],
-  mode: "development",
+  mode: process.env.NODE_ENV === "production" ? "production" : "development",
   output: {
     path: path.resolve(__dirname, "./dist"),
     publicPath: "/dist/",
@@ -25,12 +25,23 @@ module.exports = {
       },
       {
         test: /\.(ttf|eot|woff|woff2)$/,
-        use: {
-          loader: "url-loader",
-          options: {
-            name: "[name].[ext]",
+        use: [
+          {
+            loader: "url-loader",
+            options: {
+              limit: 8192,
+              name: "fonts/[name].[ext]",
+              esModule: false,
+            },
           },
-        },
+          {
+            loader: "file-loader",
+            options: {
+              name: "fonts/[name].[ext]",
+              esModule: false,
+            },
+          },
+        ],
       },
     ],
   },
