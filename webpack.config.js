@@ -3,6 +3,7 @@
 const path = require("path");
 const { VueLoaderPlugin } = require("vue-loader");
 const dataObj = require("./data/data.json");
+const webpack = require("webpack");
 
 module.exports = {
   entry: ["./src/app.js"],
@@ -33,7 +34,12 @@ module.exports = {
       },
     ],
   },
-  plugins: [new VueLoaderPlugin()],
+  plugins: [
+    new VueLoaderPlugin(),
+    new webpack.DefinePlugin({
+      "process.env.VUE_APP_URL": JSON.stringify(process.env.VUE_APP_URL),
+    }),
+  ],
   resolve: {
     alias: {
       fonts: path.resolve(__dirname, "src/assets/fonts"),

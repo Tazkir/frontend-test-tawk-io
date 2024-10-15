@@ -109,28 +109,37 @@ export default {
       category: null,
     };
   },
+  computed: {
+    apiBaseUrl() {
+      return process.env.VUE_APP_URL || "http://localhost:9000";
+    },
+  },
   methods: {
     async fetchArticles() {
       try {
         const response = await axios.get(
-          `http://localhost:9000/api/category/${this.categoryId}`
+          `${this.apiBaseUrl}/api/category/${this.categoryId}`
         );
         this.articles = response.data.filter(
           (article) => article.status === "published"
         );
       } catch (error) {
-        console.error("Error fetching category:", error);
+        console.error(
+          "Error fetching category:",
+          error.response || error.message || error
+        );
       }
     },
     async fetchCategories() {
       try {
-        const response = await axios.get(
-          "http://localhost:9000/api/categories"
-        );
+        const response = await axios.get(`${this.apiBaseUrl}/api/categories`);
         const categories = response.data;
         this.category = categories.find((cat) => cat.id === this.categoryId);
       } catch (error) {
-        console.error("Error fetching category:", error);
+        console.error(
+          "Error fetching category:",
+          error.response || error.message || error
+        );
       }
     },
     getIconComponent(iconName) {

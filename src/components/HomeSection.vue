@@ -64,16 +64,20 @@ export default {
         return categoryTitle.includes(query);
       });
     },
+    apiBaseUrl() {
+      return process.env.VUE_APP_URL || "http://localhost:9000";
+    },
   },
   methods: {
     async fetchCategories() {
       try {
-        const response = await axios.get(
-          "http://localhost:9000/api/categories"
-        );
+        const response = await axios.get(`${this.apiBaseUrl}/api/categories`);
         this.categories = response.data;
       } catch (error) {
-        console.error("Error fetching categories:", error);
+        console.error(
+          "Error fetching categories:",
+          error.response || error.message || error
+        );
       }
     },
     getIconComponent(iconName) {
