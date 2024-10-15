@@ -18,8 +18,8 @@ But if you want to move things around, feel free to do so.
 2. Clone the repository:
 
    ```
-   git clone <repository-url>
-   cd <project-folder>
+   git clone https://github.com/Tazkir/frontend-test-tawk-io.git
+   cd frontend-test-tawk-io
    ```
 
 3. Install dependencies:
